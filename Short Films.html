@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<style>
+		*{
+		  box-sizing: border-box;
+		}
+		#backgroundcol{
+			background-color:black;
+		}
+		.menu {
+		  float:left;
+		  width:20%;
+		  text-align:center;
+		}
+		.menuitem {
+		  padding:8px;
+		  margin-top:7px;
+		}
+		.menuitem:hover {
+		style="background-color:red;"
+		}
+		.main {
+		  float:left;
+		  width:60%;
+		  padding:0 20px;
+		}
+		.right {
+		  float:left;
+		  width:20%;
+		  padding:15px;
+		  margin-top:7px;
+		  text-align:center;
+		  background-color:yellow;
+
+		}
+		.topimage {
+		padding:15px;
+		text-align:center;
+		width:auto;			
+		}
+		
+		.jsonprint{
+		color:white;
+		}
+		.imagesview{
+		width:50%;
+		}
+		@media only screen and (max-width:620px) {
+		  .menu, .main, .right {
+			width:100%;
+		  }
+		}
+
+		</style>
+	</head>
+	
+<body id="backgroundcol" style="font-family:Verdana;color:#aaaaaa;">
+	<div class="menu" >
+	<img style="width:30%" src="vetflix.png">
+	</div>
+	<div class="topimage" >
+	<h1>Vetflix and Chill</h1>
+	</div>
+	
+	
+	<div style="overflow:auto">
+		<div class="menu">
+		<nav>
+		<div class="menuitem" style="background-color:blue;"><a href="homepage.html" style="color:yellow;">Life</a></div>
+		<div class="menuitem" style="background-color:blue;"><a href="Movies.html" style="color:yellow;">Movies</a></div>
+		<div class="menuitem" style="background-color:blue;"><a href="Tv Series.html" style="color:yellow;">Tv Series</a></div>
+		<div class="menuitem" style="background-color:blue;"><a href="Short Films.html" style="color:yellow;">Short Films</a></div>
+		<div class="menuitem" style="background-color:blue;"><a href="Movie Reviews.html" style="color:yellow;">Movie Reviews</a></div>
+		</nav>
+	</div>
+	  <div class="main">
+		<h2 style="text-align:center;color:red;">Short Films</h2>
+		<ol id="shortfilm">
+		  	<script>
+			if (window.XMLHttpRequest) {
+			   
+				xmlhttp=new XMLHttpRequest();
+			  }
+			  else { 
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			  xmlhttp.onreadystatechange=function() {
+				if (this.readyState==4 && this.status==200) {
+					var obj = this.responseText;
+					obj = JSON.parse(obj);
+					for(var i=0;i<obj.serverres.length;i++)
+						{
+						var line1 = document.createElement("li");
+						line1.innerHTML = obj.serverres[i].Name;
+						document.getElementById(shortfilm).appendChild(line1); 
+						var img1 = new Image();
+						img1.className = "imagesview";
+						img1.src=obj.serverres[i].url;
+						document.getElementById("shortfilm").appendChild(img1);
+						}
+					}
+				 }
+			  xmlhttp.open("GET","getdata.php?tag=shortfilm",true);
+			  xmlhttp.send();
+			  obj = JSON.parse(text);
+			</script>
+		</ol>
+	  </div>
+
+  <div class="right">
+	<h2>About</h2>
+		<ul style="color:black;list-style-type:none;">
+		  <li style="text-align:left;padding:8px;">Address : Vidyanagar, Vidya Vihar East, Vidyavihar, Mumbai, </li>
+		  <li style="text-align:left;padding:8px;">Phone Number : 022 6644 9191</li>
+		</ul>
+  </div>
+</div>
+
+</body>
+</html>
